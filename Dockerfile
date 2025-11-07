@@ -2,6 +2,11 @@
 FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 COPY . .
+
+# Give permission to mvnw
+RUN chmod +x mvnw
+
+# Build the project
 RUN ./mvnw clean package -DskipTests
 
 # Step 2: Run stage
