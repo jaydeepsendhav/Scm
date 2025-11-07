@@ -1,14 +1,12 @@
-# Use Eclipse Temurin JDK 21 base image (official and stable)
-FROM eclipse-temurin:21-jdk
-
-# Set working directory
+# Step 1: Build stage
+FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
+COPY . .
+RUN ./mvnw clean package -DskipTests
 
-# Copy the jar file from target folder
-COPY target/scm2.0-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose default Spring Boot port
+# Step 2: Run stage
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
