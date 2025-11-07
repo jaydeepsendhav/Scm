@@ -1,5 +1,5 @@
-# Use OpenJDK 17 as base image
-FROM openjdk:17-jdk-slim
+# Use Eclipse Temurin JDK 21 base image (official and stable)
+FROM eclipse-temurin:21-jdk
 
 # Set working directory
 WORKDIR /app
@@ -7,9 +7,8 @@ WORKDIR /app
 # Copy the jar file from target folder
 COPY target/scm2.0-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the default Spring Boot port
+# Expose default Spring Boot port
 EXPOSE 8080
 
-# Run the JAR file
+# Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
