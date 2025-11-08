@@ -1,4 +1,4 @@
-package com.scm.scm20.config;
+ package com.scm.scm20.config;
 
 import java.io.IOException;
 import java.util.UUID;
